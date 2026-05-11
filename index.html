@@ -362,8 +362,10 @@ footer { background: var(--black); border-top: 1px solid rgba(255,255,255,.06); 
   }
 }
 @media (max-width: 900px) {
-  .hero-visual { display: none; }
-  .floating-showcase { display: none; }
+
+  .floating-showcase {
+    display: none !important;
+  }
 
   .hero h1 { font-size: 62px; }
   nav .nav-links { display: none; }
@@ -372,6 +374,7 @@ footer { background: var(--black); border-top: 1px solid rgba(255,255,255,.06); 
   .social-proof-bar { gap: 20px; }
   .sticky-cta { display: flex; }
   body { padding-bottom: 72px; }
+
 }
 </style>
 </head>
