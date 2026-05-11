@@ -217,7 +217,146 @@ footer { background: var(--black); border-top: 1px solid rgba(255,255,255,.06); 
 /* ANIMATIONS */
 .fade-up { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
 .fade-up.visible { opacity: 1; transform: translateY(0); }
+/* ========================================
+   FLOATING HERO SHOWCASE
+======================================== */
 
+.floating-showcase {
+    position: absolute;
+    right: 4%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 520px;
+    height: 520px;
+    z-index: 2;
+}
+
+.floating-card {
+    position: absolute;
+    width: 170px;
+    height: 115px;
+    background: rgba(20,20,20,0.72);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 22px;
+    backdrop-filter: blur(18px);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    color: white;
+    font-weight: 600;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.45),
+        0 0 30px rgba(200,16,46,0.08);
+
+    animation: float 6s ease-in-out infinite;
+    transition: all .3s ease;
+}
+
+.floating-card:hover {
+    transform: translateY(-8px) scale(1.04);
+    border-color: rgba(255,255,255,0.18);
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,0.55),
+        0 0 40px rgba(200,16,46,0.18);
+}
+
+.logo-circle {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+
+    background: linear-gradient(135deg,#C8102E,#FF1A3D);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 24px;
+
+    box-shadow: 0 0 20px rgba(255,0,80,0.25);
+}
+
+/* POSITIONS */
+
+.card1 {
+    top: 20px;
+    left: 20px;
+}
+
+.card2 {
+    top: 40px;
+    right: 30px;
+    animation-delay: 1s;
+}
+
+.card3 {
+    bottom: 120px;
+    left: 60px;
+    animation-delay: 2s;
+}
+
+.card4 {
+    top: 200px;
+    right: 140px;
+    animation-delay: 1.5s;
+}
+
+.card5 {
+    bottom: 20px;
+    right: 30px;
+    animation-delay: .5s;
+}
+
+.card6 {
+    top: 210px;
+    left: 170px;
+    animation-delay: 2.5s;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-16px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.glow-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: .22;
+}
+
+.orb1 {
+    width: 260px;
+    height: 260px;
+    background: #C8102E;
+
+    top: 20px;
+    right: 50px;
+}
+
+.orb2 {
+    width: 180px;
+    height: 180px;
+    background: #FF1A3D;
+
+    bottom: 40px;
+    left: 40px;
+}
 @media (max-width: 900px) {
   .hero-visual { display: none; }
   .hero h1 { font-size: 62px; }
@@ -290,13 +429,42 @@ footer { background: var(--black); border-top: 1px solid rgba(255,255,255,.06); 
       <div><span class="stat-num">⚡</span><div class="stat-label">Instant Delivery</div></div>
     </div>
   </div>
-  <div class="hero-visual">
-    <div class="tool-card"><div class="tool-card-icon">🎬</div><div class="tool-card-name">N3TFLX</div><div class="tool-card-price">From ₱99/mo</div></div>
-    <div class="tool-card"><div class="tool-card-icon">🎵</div><div class="tool-card-name">SP0T1</div><div class="tool-card-price">From ₱65/mo</div></div>
-    <div class="tool-card"><div class="tool-card-icon">▶️</div><div class="tool-card-name">YTUBE</div><div class="tool-card-price">From ₱49/mo</div></div>
-    <div class="tool-card"><div class="tool-card-icon">🖌️</div><div class="tool-card-name">C@NV@</div><div class="tool-card-price">From ₱50/mo</div></div>
-    <div class="tool-card large"><div class="tool-card-icon" style="font-size:22px">✅</div><div><div class="tool-card-name">Instant Delivery After Payment</div><div class="tool-card-price">Fast · Reliable · Affordable</div></div></div>
+  <div class="floating-showcase">
+
+  <div class="floating-card card1">
+    <div class="logo-circle">🤖</div>
+    <span>AI Tools</span>
   </div>
+
+  <div class="floating-card card2">
+    <div class="logo-circle">🎵</div>
+    <span>Music</span>
+  </div>
+
+  <div class="floating-card card3">
+    <div class="logo-circle">🎬</div>
+    <span>Streaming</span>
+  </div>
+
+  <div class="floating-card card4">
+    <div class="logo-circle">⚡</div>
+    <span>Instant Access</span>
+  </div>
+
+  <div class="floating-card card5">
+    <div class="logo-circle">💎</div>
+    <span>Premium Apps</span>
+  </div>
+
+  <div class="floating-card card6">
+    <div class="logo-circle">🧠</div>
+    <span>Productivity</span>
+  </div>
+
+  <div class="glow-orb orb1"></div>
+  <div class="glow-orb orb2"></div>
+
+</div>
 </section>
 
 <!-- SOCIAL PROOF BAR -->
