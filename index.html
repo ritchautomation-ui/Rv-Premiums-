@@ -218,144 +218,148 @@ footer { background: var(--black); border-top: 1px solid rgba(255,255,255,.06); 
 .fade-up { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
 .fade-up.visible { opacity: 1; transform: translateY(0); }
 /* ========================================
-   FLOATING HERO SHOWCASE
+/* ========================================
+   PREMIUM ORBIT SHOWCASE
 ======================================== */
 
-.floating-showcase {
-    position: absolute;
-    right: 4%;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 520px;
-    height: 520px;
-    z-index: 2;
+.floating-showcase{
+  position:absolute;
+  right:2%;
+  top:50%;
+  transform:translateY(-50%);
+  width:560px;
+  height:560px;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
-.floating-card {
-    position: absolute;
-    width: 170px;
-    height: 115px;
-    background: rgba(20,20,20,0.72);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 22px;
-    backdrop-filter: blur(18px);
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-
-    color: white;
-    font-weight: 600;
-
-    box-shadow:
-        0 10px 30px rgba(0,0,0,0.45),
-        0 0 30px rgba(200,16,46,0.08);
-
-    animation: float 6s ease-in-out infinite;
-    transition: all .3s ease;
+.orbit-ring{
+  position:absolute;
+  border:1px solid rgba(200,16,46,.15);
+  border-radius:50%;
 }
 
-.floating-card:hover {
-    transform: translateY(-8px) scale(1.04);
-    border-color: rgba(255,255,255,0.18);
-
-    box-shadow:
-        0 20px 50px rgba(0,0,0,0.55),
-        0 0 40px rgba(200,16,46,0.18);
+.ring1{
+  width:420px;
+  height:420px;
 }
 
-.logo-circle {
-    width: 55px;
-    height: 55px;
-    border-radius: 50%;
+.ring2{
+  width:290px;
+  height:290px;
+}
 
-    background: linear-gradient(135deg,#C8102E,#FF1A3D);
+.sc-center{
+  position:absolute;
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  background:#090909;
+  border:1px solid rgba(255,0,60,.3);
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 
-    font-size: 24px;
+  font-family:var(--font-display);
+  font-size:42px;
+  letter-spacing:2px;
+  color:#ff204f;
 
-    box-shadow: 0 0 20px rgba(255,0,80,0.25);
+  box-shadow:
+  0 0 45px rgba(255,0,70,.25),
+  inset 0 0 25px rgba(255,0,70,.08);
+}
+
+.orbit-group{
+  position:absolute;
+  width:100%;
+  height:100%;
+  animation:orbitSpin 32s linear infinite;
+}
+
+.sc-bubble{
+  position:absolute;
+  width:92px;
+  height:92px;
+  border-radius:50%;
+
+  background:rgba(10,10,10,.92);
+  border:1px solid rgba(255,255,255,.06);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  backdrop-filter:blur(14px);
+
+  transition:.3s ease;
+
+  box-shadow:
+  0 10px 30px rgba(0,0,0,.45);
+}
+
+.sc-bubble:hover{
+  transform:scale(1.08);
+  border-color:rgba(255,255,255,.18);
+}
+
+.sc-inner{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:6px;
+}
+
+.sc-label{
+  font-size:11px;
+  font-weight:600;
+  color:white;
 }
 
 /* POSITIONS */
 
-.card1 {
-    top: 20px;
-    left: 20px;
+.sc-b1{
+  top:30px;
+  left:50%;
+  transform:translateX(-50%);
 }
 
-.card2 {
-    top: 40px;
-    right: 30px;
-    animation-delay: 1s;
+.sc-b2{
+  top:110px;
+  right:60px;
 }
 
-.card3 {
-    bottom: 120px;
-    left: 60px;
-    animation-delay: 2s;
+.sc-b3{
+  bottom:110px;
+  right:70px;
 }
 
-.card4 {
-    top: 200px;
-    right: 140px;
-    animation-delay: 1.5s;
+.sc-b4{
+  bottom:40px;
+  left:50%;
+  transform:translateX(-50%);
 }
 
-.card5 {
-    bottom: 20px;
-    right: 30px;
-    animation-delay: .5s;
+.sc-b5{
+  bottom:110px;
+  left:70px;
 }
 
-.card6 {
-    top: 210px;
-    left: 170px;
-    animation-delay: 2.5s;
+.sc-b6{
+  top:110px;
+  left:60px;
 }
 
-@keyframes float {
-    0% {
-        transform: translateY(0px);
-    }
-
-    50% {
-        transform: translateY(-16px);
-    }
-
-    100% {
-        transform: translateY(0px);
-    }
-}
-
-.glow-orb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(90px);
-    opacity: .22;
-}
-
-.orb1 {
-    width: 260px;
-    height: 260px;
-    background: #C8102E;
-
-    top: 20px;
-    right: 50px;
-}
-
-.orb2 {
-    width: 180px;
-    height: 180px;
-    background: #FF1A3D;
-
-    bottom: 40px;
-    left: 40px;
+@keyframes orbitSpin{
+  from{
+    transform:rotate(0deg);
+  }
+  to{
+    transform:rotate(360deg);
+  }
 }
 @media (max-width: 900px) {
   .hero-visual { display: none; }
@@ -429,40 +433,89 @@ footer { background: var(--black); border-top: 1px solid rgba(255,255,255,.06); 
       <div><span class="stat-num">⚡</span><div class="stat-label">Instant Delivery</div></div>
     </div>
   </div>
-  <div class="floating-showcase">
+ <div class="floating-showcase">
 
-  <div class="floating-card card1">
-    <div class="logo-circle">🤖</div>
-    <span>AI Tools</span>
+  <div class="orbit-ring ring1"></div>
+  <div class="orbit-ring ring2"></div>
+
+  <div class="sc-center">RV</div>
+
+  <div class="orbit-group">
+
+    <!-- NETFLIX -->
+    <div class="sc-bubble sc-b1">
+      <div class="sc-inner">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+          <rect width="36" height="36" rx="8" fill="#E50914" opacity="0.15"/>
+          <path d="M10 8h4.2l3.8 10.4V8H22v20h-4l-4-10.8V28H10V8z" fill="#E50914"/>
+        </svg>
+        <div class="sc-label">Netflix</div>
+      </div>
+    </div>
+
+    <!-- SPOTIFY -->
+    <div class="sc-bubble sc-b2">
+      <div class="sc-inner">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <rect width="32" height="32" rx="16" fill="#1DB954" opacity="0.15"/>
+          <circle cx="16" cy="16" r="9" stroke="#1DB954" stroke-width="1.5"/>
+          <path d="M11 13.5c2.8-0.9 5.8-0.7 8.2.6" stroke="#1DB954" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M11.5 16.5c2.3-0.7 4.8-0.6 6.8.5" stroke="#1DB954" stroke-width="1.4" stroke-linecap="round"/>
+          <path d="M12 19.2c1.8-0.5 3.7-0.4 5.2.4" stroke="#1DB954" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>
+        <div class="sc-label">Spotify</div>
+      </div>
+    </div>
+
+    <!-- DISNEY -->
+    <div class="sc-bubble sc-b3">
+      <div class="sc-inner">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+          <rect width="36" height="36" rx="8" fill="#0C3182" opacity="0.2"/>
+          <text x="5" y="22" font-size="13" font-weight="700" fill="#1a6bff">Disney</text>
+          <text x="24" y="16" font-size="10" font-weight="700" fill="#fff">+</text>
+        </svg>
+        <div class="sc-label">Disney+</div>
+      </div>
+    </div>
+
+    <!-- YOUTUBE -->
+    <div class="sc-bubble sc-b4">
+      <div class="sc-inner">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <rect width="28" height="28" rx="6" fill="#FF0000" opacity="0.15"/>
+          <rect x="4" y="8" width="20" height="13" rx="3.5" fill="#FF0000"/>
+          <polygon points="12,11.5 19,14.5 12,17.5" fill="white"/>
+        </svg>
+        <div class="sc-label">YouTube</div>
+      </div>
+    </div>
+
+    <!-- HBO -->
+    <div class="sc-bubble sc-b5">
+      <div class="sc-inner">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <rect width="32" height="32" rx="8" fill="#5822B4" opacity="0.18"/>
+          <text x="4" y="19" font-size="10" font-weight="900" fill="#8B5CF6">HBO</text>
+          <text x="4" y="27" font-size="8" font-weight="700" fill="rgba(255,255,255,0.5)">MAX</text>
+        </svg>
+        <div class="sc-label">HBO Max</div>
+      </div>
+    </div>
+
+    <!-- CHATGPT -->
+    <div class="sc-bubble sc-b6">
+      <div class="sc-inner">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <rect width="28" height="28" rx="6" fill="#10A37F" opacity="0.15"/>
+          <path d="M14 5C9.03 5 5 9.03 5 14s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9z" stroke="#10A37F" stroke-width="1.4"/>
+          <circle cx="14" cy="11.5" r="1.2" fill="#10A37F"/>
+        </svg>
+        <div class="sc-label">ChatGPT+</div>
+      </div>
+    </div>
+
   </div>
-
-  <div class="floating-card card2">
-    <div class="logo-circle">🎵</div>
-    <span>Music</span>
-  </div>
-
-  <div class="floating-card card3">
-    <div class="logo-circle">🎬</div>
-    <span>Streaming</span>
-  </div>
-
-  <div class="floating-card card4">
-    <div class="logo-circle">⚡</div>
-    <span>Instant Access</span>
-  </div>
-
-  <div class="floating-card card5">
-    <div class="logo-circle">💎</div>
-    <span>Premium Apps</span>
-  </div>
-
-  <div class="floating-card card6">
-    <div class="logo-circle">🧠</div>
-    <span>Productivity</span>
-  </div>
-
-  <div class="glow-orb orb1"></div>
-  <div class="glow-orb orb2"></div>
 
 </div>
 </section>
