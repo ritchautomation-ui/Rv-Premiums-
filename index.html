@@ -376,22 +376,76 @@ footer { background: var(--black); border-top: 1px solid rgba(255,255,255,.06); 
   body { padding-bottom: 72px; }
 
 }
+
+/* ========================================
+   ORDER FORM
+======================================== */
+.order-form-wrap { background: var(--black-3); border: 1px solid rgba(255,255,255,.08); border-radius: 18px; padding: 40px 36px; max-width: 680px; margin: 0 auto; position: relative; overflow: hidden; }
+.order-form-wrap::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--red); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+.form-label { font-size: 12px; font-weight: 700; color: var(--gray-light); text-transform: uppercase; letter-spacing: .06em; display: flex; align-items: center; gap: 6px; }
+.form-label .required { color: var(--red-light); font-size: 15px; }
+.form-input, .form-select { width: 100%; background: var(--black-2); border: 1.5px solid rgba(255,255,255,.1); border-radius: 10px; padding: 14px 16px; color: var(--white); font-family: var(--font-body); font-size: 16px; font-weight: 500; outline: none; transition: border-color .2s, box-shadow .2s; appearance: none; -webkit-appearance: none; min-height: 48px; }
+.form-input:focus, .form-select:focus { border-color: var(--red); box-shadow: 0 0 0 3px rgba(200,16,46,.15); }
+.form-input::placeholder { color: rgba(255,255,255,.28); }
+.form-select option { background: #1E1E1E; color: var(--white); }
+.form-select:disabled, .form-select[disabled] { opacity: .45; cursor: not-allowed; }
+.form-input.invalid, .form-select.invalid { border-color: var(--red); box-shadow: 0 0 0 3px rgba(200,16,46,.18); }
+.field-error { display: none; font-size: 12px; color: var(--red-light); font-weight: 600; margin-top: -2px; }
+.field-error.visible { display: block; }
+.select-wrapper { position: relative; }
+.select-arrow { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--gray); font-size: 11px; }
+
+.search-wrapper { position: relative; }
+.search-wrapper input { padding-left: 40px; }
+.search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--gray); font-size: 15px; pointer-events: none; }
+#serviceDropdown { display: none; position: absolute; top: calc(100% + 6px); left: 0; right: 0; background: #1E1E1E; border: 1.5px solid rgba(255,255,255,.1); border-radius: 10px; z-index: 50; max-height: 220px; overflow-y: auto; box-shadow: 0 12px 32px rgba(0,0,0,.5); }
+#serviceDropdown .dd-item { padding: 11px 16px; font-size: 14px; cursor: pointer; transition: background .2s, color .2s; display: flex; align-items: center; gap: 10px; color: var(--gray-light); }
+#serviceDropdown .dd-item:hover { background: rgba(200,16,46,.12); color: var(--white); }
+#serviceDropdown .dd-item .dd-cat { font-size: 11px; color: var(--gray); margin-left: auto; text-transform: uppercase; letter-spacing: .04em; }
+.no-results { padding: 16px; font-size: 13px; color: var(--gray); text-align: center; }
+
+.order-empty-state { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,.03); border: 1px dashed rgba(255,255,255,.12); border-radius: 12px; padding: 16px 18px; font-size: 13px; color: var(--gray-light); margin-bottom: 24px; }
+.order-preview { background: rgba(200,16,46,.08); border: 1px solid rgba(200,16,46,.22); border-radius: 12px; padding: 18px 20px; margin-bottom: 24px; display: none; }
+.order-preview.visible { display: block; }
+.preview-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--red-light); margin-bottom: 12px; }
+.preview-row { display: flex; justify-content: space-between; font-size: 14px; padding: 4px 0; }
+.preview-row .label { color: var(--gray-light); }
+.preview-row .value { font-weight: 700; color: var(--white); }
+.preview-price { font-family: var(--font-display); font-size: 26px; letter-spacing: 1px; color: var(--gold); margin-top: 10px; text-align: right; }
+.copy-summary-btn { width: 100%; margin-top: 14px; padding: 10px; border-radius: 8px; border: 1.5px solid rgba(200,16,46,.35); background: rgba(200,16,46,.08); color: var(--white); font-size: 13px; font-weight: 700; cursor: pointer; transition: all .2s; }
+.copy-summary-btn:hover { background: rgba(200,16,46,.18); border-color: var(--red); }
+.copy-summary-btn:active { transform: scale(0.98); }
+
+.form-submit { width: 100%; padding: 16px; border-radius: 10px; border: none; background: var(--red); color: #fff; font-size: 16px; font-weight: 800; cursor: pointer; transition: all .2s; box-shadow: 0 8px 28px rgba(200,16,46,.35); display: flex; align-items: center; justify-content: center; gap: 10px; letter-spacing: .01em; }
+.form-submit:hover { background: var(--red-light); transform: translateY(-2px); box-shadow: 0 12px 34px rgba(200,16,46,.45); }
+.form-submit:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+
+.toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(20px); background: var(--black-3); border: 1.5px solid rgba(34,197,94,.4); color: var(--white); padding: 12px 20px; border-radius: 50px; font-size: 13px; font-weight: 700; box-shadow: 0 12px 32px rgba(0,0,0,.5); z-index: 99999; opacity: 0; pointer-events: none; transition: opacity .3s ease, transform .3s ease; display: flex; align-items: center; gap: 8px; font-family: var(--font-body); }
+.toast.error { border-color: rgba(200,16,46,.5); }
+.toast.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+@media (max-width: 768px) {
+  .form-row { grid-template-columns: 1fr; }
+  .order-form-wrap { padding: 28px 20px; }
+}
 </style>
 </head>
 <body>
 
 <!-- FLOATING MESSENGER FAB -->
 <div class="fab-wrapper">
-  <a href="https://www.facebook.com/messages/t/688533457667560" target="_blank" class="fab-messenger" aria-label="Chat on Messenger">
+  <a href="#order" class="fab-messenger" aria-label="Go to Order Form">
     <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.145 2 11.243c0 2.921 1.458 5.527 3.747 7.246V21l2.168-1.19c.578.16 1.19.247 1.823.247.224 0 .446-.01.664-.03L12 20.5c5.523 0 10-4.145 10-9.257S17.523 2 12 2zm1.09 12.456l-2.547-2.718-4.972 2.718 5.466-5.803 2.609 2.718 4.91-2.718-5.466 5.803z"/></svg>
   </a>
-  <div class="fab-tooltip">💬 Chat with us — fast reply!</div>
+  <div class="fab-tooltip">📋 Place your order</div>
 </div>
 
 <!-- STICKY MOBILE CTA -->
 <div class="sticky-cta">
   <div class="sticky-cta-text"><strong>Ready to order?</strong>We reply in minutes!</div>
-  <a href="https://www.facebook.com/messages/t/688533457667560" target="_blank" class="sticky-cta-btn">Order Now →</a>
+  <a href="#order" class="sticky-cta-btn">Order Now →</a>
 </div>
 
 <!-- TOP URGENCY BAR -->
@@ -411,9 +465,10 @@ footer { background: var(--black); border-top: 1px solid rgba(255,255,255,.06); 
   <ul class="nav-links">
     <li><a href="#products">Streaming</a></li>
     <li><a href="#aitools">AI Tools</a></li>
+    <li><a href="#order">Order</a></li>
     <li><a href="#how">How It Works</a></li>
     <li><a href="#reviews">Reviews</a></li>
-    <li><a href="https://www.facebook.com/messages/t/688533457667560" target="_blank" class="nav-cta">💬 Order Now</a></li>
+    <li><a href="#order" class="nav-cta">💬 Order Now</a></li>
   </ul>
 </nav>
 
@@ -427,7 +482,7 @@ footer { background: var(--black); border-top: 1px solid rgba(255,255,255,.06); 
     <h1>AFFORDABLE<br><span class="accent">AI TOOLS</span><br>&amp; ACCESS</h1>
     <p class="hero-sub">Premium streaming, music, design tools &amp; AI software at unbeatable prices. Fast delivery, trusted since 2021.</p>
     <div class="hero-actions">
-      <a href="https://www.facebook.com/messages/t/688533457667560" target="_blank" class="btn-primary">💬 Message to Order</a>
+      <a href="#order" class="btn-primary">📋 Place an Order</a>
       <a href="#products" class="btn-outline">Browse Products ↓</a>
     </div>
     <div class="urgency-micro">🔒 No hidden fees &nbsp;·&nbsp; <span>⚡ Instant delivery</span> &nbsp;·&nbsp; GCash accepted</div>
@@ -627,7 +682,103 @@ footer { background: var(--black); border-top: 1px solid rgba(255,255,255,.06); 
     <div class="product-card"><div class="product-thumb" style="background:linear-gradient(135deg,#00a651,#002d15)"><div style="font-size:52px;position:relative;z-index:1">💡</div><div class="product-cat-badge">AI</div></div><div class="product-body"><div class="product-name">CHATGPT GO</div><div class="product-desc">6 Screens: ₱249/mo · ₱699/3mo · ₱1,299/6mo · ₱2,299/yr</div><div class="product-footer"><div class="product-price">₱249 <span>/ 6 screens</span></div><a href="https://www.facebook.com/messages/t/688533457667560" target="_blank" class="btn-order">Order →</a></div></div></div>
     <div class="product-card" id="productivity"><div class="product-thumb" style="background:linear-gradient(135deg,#1a1a2e,#0d0d1a)"><div style="font-size:52px;position:relative;z-index:1">📝</div><div class="product-cat-badge">Writing</div></div><div class="product-body"><div class="product-name">GRAMMARLY</div><div class="product-desc">1 Device/Shared: ₱50/mo · ₱129/3mo · ₱229/6mo · ₱399/yr</div><div class="product-footer"><div class="product-price">₱50 <span>/ month</span></div><a href="https://www.facebook.com/messages/t/688533457667560" target="_blank" class="btn-order">Order →</a></div></div></div>
     <div class="product-card"><div class="product-thumb" style="background:linear-gradient(135deg,#2d1a00,#1a0f00)"><div style="font-size:52px;position:relative;z-index:1">📱</div><div class="product-cat-badge">Productivity</div></div><div class="product-body"><div class="product-name">IQIYI</div><div class="product-desc">4 Devices: ₱139/mo · ₱379/3mo · ₱649/6mo · ₱1,099/yr</div><div class="product-footer"><div class="product-price">₱139 <span>/ month</span></div><a href="https://www.facebook.com/messages/t/688533457667560" target="_blank" class="btn-order">Order →</a></div></div></div>
-    <div class="product-card" style="border-color:rgba(200,16,46,.3);background:rgba(200,16,46,.04)"><div class="product-thumb" style="background:linear-gradient(135deg,#3d0010,#1a0008)"><div style="font-size:52px;position:relative;z-index:1">👀</div><div class="product-cat-badge">Unlisted</div></div><div class="product-body"><div class="product-name">Hindi Mo Nakita?</div><div class="product-desc">May hinahanap ka na wala sa listahan? Message us — we'll check availability and rates!</div><div class="product-footer"><div class="product-price" style="color:var(--red)">Ask Us!</div><a href="https://www.facebook.com/messages/t/688533457667560" target="_blank" class="btn-order">Chat →</a></div></div></div>
+    <div class="product-card" style="border-color:rgba(200,16,46,.3);background:rgba(200,16,46,.04)"><div class="product-thumb" style="background:linear-gradient(135deg,#3d0010,#1a0008)"><div style="font-size:52px;position:relative;z-index:1">👀</div><div class="product-cat-badge">Unlisted</div></div><div class="product-body"><div class="product-name">Hindi Mo Nakita?</div><div class="product-desc">May hinahanap ka na wala sa listahan? Message us — we'll check availability and rates!</div><div class="product-footer"><div class="product-price" style="color:var(--red)">Ask Us!</div><a href="https://www.facebook.com/messages/t/688533457667560" target="_blank" class="btn-order btn-order-direct">Chat →</a></div></div></div>
+  </div>
+</section>
+
+<!-- ORDER FORM -->
+<section style="background:var(--black-2)" id="order">
+  <div class="section-label">📋 Quick &amp; Easy</div>
+  <h2 class="section-title">PLACE YOUR <span style="color:var(--red)">ORDER</span></h2>
+  <p class="section-desc">Fill out the form below and we'll send you the payment details on Messenger. GCash accepted.</p>
+
+  <div class="order-form-wrap fade-up">
+     <div class="form-group">
+        <label class="form-label">🔍 Search Service <span class="required">*</span></label>
+        <div class="search-wrapper" style="position:relative;">
+           <span class="search-icon">🔍</span>
+           <input type="text" class="form-input" id="serviceSearch" placeholder="Type to search... e.g. Netflix, ChatGPT, Canva" autocomplete="off" aria-expanded="false" role="combobox" />
+           <div id="serviceDropdown"></div>
+        </div>
+        <input type="hidden" id="selectedService" />
+        <span class="field-error" id="serviceError">Please select a service.</span>
+     </div>
+     <div class="form-row">
+        <div class="form-group">
+           <label class="form-label">📅 Duration <span class="required">*</span></label>
+           <div class="select-wrapper">
+              <select class="form-select" id="duration" disabled>
+                 <option value="">— Select a service first —</option>
+              </select>
+              <span class="select-arrow">▼</span>
+           </div>
+           <span class="field-error" id="durationError">Please select a duration.</span>
+        </div>
+        <div class="form-group">
+           <label class="form-label">👥 Account Type <span class="required">*</span></label>
+           <div class="select-wrapper">
+              <select class="form-select" id="accountType" disabled>
+                 <option value="">— Select a service first —</option>
+              </select>
+              <span class="select-arrow">▼</span>
+           </div>
+           <span class="field-error" id="accountTypeError">Please select an account type.</span>
+        </div>
+     </div>
+
+     <div class="order-empty-state" id="orderEmptyState">
+        🛈 Select a service to view available plans and pricing.
+     </div>
+     <div class="order-preview" id="orderPreview">
+        <div class="preview-title">📋 Order Summary</div>
+        <div class="preview-row"><span class="label">Messenger Name</span><span class="value" id="previewName">—</span></div>
+        <div class="preview-row"><span class="label">Phone Number</span><span class="value" id="previewPhone">—</span></div>
+        <div class="preview-row"><span class="label">Source</span><span class="value" id="previewSource">—</span></div>
+        <div class="preview-row"><span class="label">Service</span><span class="value" id="previewService">—</span></div>
+        <div class="preview-row"><span class="label">Duration</span><span class="value" id="previewDuration">—</span></div>
+        <div class="preview-row"><span class="label">Account Type</span><span class="value" id="previewType">—</span></div>
+        <div class="preview-row" id="previewNotesRow" style="display:none;"><span class="label">Notes</span><span class="value" id="previewNotes">—</span></div>
+        <div class="preview-price" id="previewPrice"></div>
+        <button type="button" class="copy-summary-btn" id="copySummaryBtn" onclick="copyOrderSummary()">📋 Copy Order Summary</button>
+     </div>
+
+     <div class="form-row">
+        <div class="form-group">
+           <label class="form-label">📱 Messenger Name <span class="required">*</span></label>
+           <input type="text" class="form-input" id="fbname" placeholder="e.g. Juan DC" autocomplete="name" />
+           <span class="field-error" id="fbnameError">Please enter your Messenger name.</span>
+        </div>
+        <div class="form-group">
+           <label class="form-label">☎️ Phone Number <span class="required">*</span></label>
+           <input type="tel" class="form-input" id="phone" placeholder="e.g. 09XX XXX XXXX" autocomplete="tel" inputmode="tel" />
+           <span class="field-error" id="phoneError">Please enter a valid phone number.</span>
+        </div>
+     </div>
+     <div class="form-group">
+        <label class="form-label">📍 How Did You Find Us? <span style="color:var(--gray-light);font-size:11px;font-weight:500;text-transform:none;letter-spacing:0">(optional)</span></label>
+        <div class="select-wrapper">
+           <select class="form-select" id="source">
+              <option value="">— Select Source —</option>
+              <option value="Facebook Page">Facebook Page</option>
+              <option value="Facebook Group">Facebook Group</option>
+              <option value="Website">Website</option>
+              <option value="Referral">Referral</option>
+              <option value="TikTok">TikTok</option>
+              <option value="Friend">Friend</option>
+              <option value="Other">Other</option>
+           </select>
+           <span class="select-arrow">▼</span>
+        </div>
+     </div>
+     <div class="form-group">
+        <label class="form-label"> Additional Notes <span style="color:var(--gray-light);font-size:11px;font-weight:500;text-transform:none;letter-spacing:0">(optional)</span></label>
+        <input type="text" class="form-input" id="notes" placeholder="Any special requests or questions?" />
+     </div>
+
+     <button class="form-submit" id="submitBtn" onclick="submitOrder()">
+     💬 Send Order via Messenger
+     </button>
+     <p style="text-align:center;font-size:12px;color:var(--gray);margin-top:14px;">You'll be redirected to Facebook Messenger with your order details pre-filled.</p>
   </div>
 </section>
 
@@ -636,7 +787,7 @@ footer { background: var(--black); border-top: 1px solid rgba(255,255,255,.06); 
   <h2>DON'T WAIT — <span style="color:#FFD700">ORDER NOW</span></h2>
   <p>Thousands of clients already enjoying affordable access. Join them today — instant delivery guaranteed after payment.</p>
   <div class="cta-btn-group">
-    <a href="https://www.facebook.com/messages/t/688533457667560" target="_blank" class="btn-white">💬 Message to Order</a>
+    <a href="#order" class="btn-white">📋 Use Order Form</a>
     <a href="#aitools" class="btn-ghost">See AI Tools →</a>
   </div>
 </div>
@@ -790,6 +941,346 @@ function filterAI(e, cat) {
   document.querySelectorAll('.ai-tab').forEach(t => t.classList.remove('active'));
   e.target.classList.add('active');
 }
+
+/* ========================================
+   ORDER FORM
+======================================== */
+
+// ── SERVICES CATALOG (matches the pricing shown on the product cards above) ──
+const SERVICES = [
+  { name:'Netflix',      cat:'Streaming', icon:'🎬', pricing:{ 1:{solo1:99,solo2:179},  3:{solo1:289,solo2:449}, 6:{solo1:499,solo2:699}, 12:{solo1:899,solo2:1199} }, types:['solo1','solo2'] },
+  { name:'Disney+',      cat:'Streaming', icon:'✨', pricing:{ 1:{solo1:109,solo2:169}, 3:{solo1:279,solo2:439}, 6:{solo1:489,solo2:699}, 12:{solo1:899,solo2:1199} }, types:['solo1','solo2'] },
+  { name:'Prime Video',  cat:'Streaming', icon:'📦', pricing:{ 1:{shared6:120}, 3:{shared6:299}, 6:{shared6:599}, 12:{shared6:1099} }, types:['shared6'] },
+  { name:'HBO Max',      cat:'Streaming', icon:'💜', pricing:{ 1:{solo1:99,shared6:249}, 3:{solo1:259,shared6:599}, 6:{solo1:399,shared6:1499}, 12:{solo1:899} }, types:['solo1','shared6'] },
+  { name:'Loklok',       cat:'Streaming', icon:'📺', pricing:{ 1:{solo1:99,shared3:149}, 3:{solo1:229,shared3:599}, 6:{solo1:379,shared3:999}, 12:{solo1:799} }, types:['solo1','shared3'] },
+  { name:'Viu',          cat:'Streaming', icon:'🌐', pricing:{ 1:{shared4:139}, 3:{shared4:379}, 6:{shared4:649}, 12:{shared4:1099} }, types:['shared4'] },
+  { name:'Vivamax',      cat:'Streaming', icon:'🎞️', pricing:{ 1:{solo1:99,shared5:149}, 3:{solo1:229,shared5:349}, 6:{solo1:379,shared5:599}, 12:{solo1:799} }, types:['solo1','shared5'] },
+  { name:'Viva One',     cat:'Streaming', icon:'🎭', pricing:{ 1:{solo1:99,shared5:149}, 3:{solo1:229,shared5:349}, 6:{solo1:379,shared5:599}, 12:{solo1:799} }, types:['solo1','shared5'] },
+  { name:'Spotify',      cat:'Music',     icon:'🎵', pricing:{ 1:{solo1:65}, 6:{solo1:399}, 12:{solo1:799} }, types:['solo1'] },
+  { name:'YouTube',      cat:'Music',     icon:'▶️', pricing:{ 1:{solo1:49,shared6:80}, 3:{solo1:179,shared6:230}, 6:{solo1:399,shared6:400}, 12:{solo1:899} }, types:['solo1','shared6'] },
+  { name:'iWantTFC',     cat:'Music',     icon:'🎶', pricing:{ 1:{shared6:120}, 3:{shared6:299}, 6:{shared6:599}, 12:{shared6:1099} }, types:['shared6'] },
+  { name:'Canva',        cat:'Design',    icon:'🖌️', pricing:{ 1:{shared4:50}, 12:{shared4:399} }, types:['shared4'] },
+  { name:'CapCut',       cat:'Design',    icon:'✂️', pricing:{ 1:{shared4:150}, 3:{shared4:399}, 6:{shared4:699}, 12:{shared4:1199} }, types:['shared4'] },
+  { name:'C 6PT Plus',   cat:'AI',        icon:'🤖', pricing:{ 1:{solo1:180,shared5:880}, 3:{solo1:499,shared5:2399}, 6:{solo1:899}, 12:{solo1:1599} }, types:['solo1','shared5'] },
+  { name:'ChatGPT Go',   cat:'AI',        icon:'💡', pricing:{ 1:{shared6:249}, 3:{shared6:699}, 6:{shared6:1299}, 12:{shared6:2299} }, types:['shared6'] },
+  { name:'Grammarly',    cat:'Writing',   icon:'📝', pricing:{ 1:{solo1:50,shared:50}, 3:{solo1:129,shared:129}, 6:{solo1:229,shared:229}, 12:{solo1:399,shared:399} }, types:['solo1','shared'] },
+  { name:'iQIYI',        cat:'Streaming', icon:'📱', pricing:{ 1:{shared4:139}, 3:{shared4:379}, 6:{shared4:649}, 12:{shared4:1099} }, types:['shared4'] },
+  // AI tools catalog (no fixed public pricing — ask on Messenger, fallback duration/type lists are used)
+  { name:'Jenni AI',         cat:'Research',       icon:'✍️', pricing:{}, types:[] },
+  { name:'Paperpal',         cat:'Research',       icon:'📄', pricing:{}, types:[] },
+  { name:'Elicit AI',        cat:'Research',       icon:'🔬', pricing:{}, types:[] },
+  { name:'SciSpace',         cat:'Research',       icon:'🚀', pricing:{}, types:[] },
+  { name:'AnswerThis',       cat:'Research',       icon:'💬', pricing:{}, types:[] },
+  { name:'Consensus',        cat:'Research',       icon:'📊', pricing:{}, types:[] },
+  { name:'StealthWriter AI', cat:'AI Humanization',icon:'👻', pricing:{}, types:[] },
+  { name:'WriteHuman AI',    cat:'AI Humanization',icon:'🖊️', pricing:{}, types:[] },
+  { name:'AIUndetect AI',    cat:'AI Humanization',icon:'🛡️', pricing:{}, types:[] },
+  { name:'Undetectable AI',  cat:'AI Humanization',icon:'🔒', pricing:{}, types:[] },
+  { name:'StealthGPT AI',    cat:'AI Humanization',icon:'🥷', pricing:{}, types:[] },
+  { name:'Originality AI',   cat:'AI Humanization',icon:'✅', pricing:{}, types:[] },
+  { name:'Gizmo AI',         cat:'Study',          icon:'🃏', pricing:{}, types:[] },
+  { name:'Brainscape',       cat:'Study',          icon:'🧠', pricing:{}, types:[] },
+  { name:'NoteGPT IO',       cat:'Study',          icon:'📓', pricing:{}, types:[] },
+  { name:'TurboLearn AI',    cat:'Study',          icon:'⚡', pricing:{}, types:[] },
+  { name:'ChatPDF AI',       cat:'Study',          icon:'💬', pricing:{}, types:[] },
+  { name:'Genially',         cat:'Content',        icon:'🎪', pricing:{}, types:[] },
+  { name:'Gamma App',        cat:'Content',        icon:'🎴', pricing:{}, types:[] },
+  { name:'OpenArt AI',       cat:'Content',        icon:'🎨', pricing:{}, types:[] },
+  { name:'Figma Pro',        cat:'Content',        icon:'🖥️', pricing:{}, types:[] },
+  { name:'Krisp AI',         cat:'Productivity',   icon:'🔇', pricing:{}, types:[] },
+  { name:'Otter AI',         cat:'Productivity',   icon:'🦦', pricing:{}, types:[] },
+  { name:'Notion',           cat:'Productivity',   icon:'📋', pricing:{}, types:[] },
+  { name:'Moises AI',        cat:'Productivity',   icon:'🎵', pricing:{}, types:[] },
+  { name:'JustDone AI',      cat:'AI Writing',     icon:'✍️', pricing:{}, types:[] },
+  { name:'Sidekicker AI',    cat:'AI Writing',     icon:'🦸', pricing:{}, types:[] },
+  { name:'WriteLess AI',     cat:'AI Writing',     icon:'📝', pricing:{}, types:[] },
+];
+
+const DURATION_LABELS = { '1':'1 Month','3':'3 Months','6':'6 Months','12':'12 Months (1 Year)' };
+const TYPE_LABELS = { solo1:'Solo Account (1 Screen)',solo2:'Solo Profile (2 Screens)',shared:'Shared Account',shared3:'Shared Account (3 Screens)',shared4:'Shared Account (4 Devices)',shared5:'Shared Account (5 Screens)',shared6:'Shared Account (6 Screens)' };
+// Fallback duration/type lists ONLY used for products without fixed pricing configured above (AI tools catalog).
+const FALLBACK_DURATIONS = ['1','3','6','12'];
+const FALLBACK_TYPES = ['solo1','shared'];
+
+// Case-insensitive lookup — product card text is uppercase (e.g. "NETFLIX"), catalog names are normal case.
+function findService(name) {
+  const q = (name || '').trim().toLowerCase();
+  return SERVICES.find(s => s.name.toLowerCase() === q);
+}
+
+function getDurationsFor(svc) {
+  if (svc && svc.pricing && Object.keys(svc.pricing).length) {
+    return Object.keys(svc.pricing).sort((a, b) => Number(a) - Number(b));
+  }
+  return FALLBACK_DURATIONS;
+}
+function getTypesFor(svc, duration) {
+  if (svc && svc.pricing && duration && svc.pricing[duration]) {
+    return Object.keys(svc.pricing[duration]);
+  }
+  if (svc && svc.types && svc.types.length) return svc.types;
+  return FALLBACK_TYPES;
+}
+
+// ── Scroll to the order form and pre-fill a service (called by every "Order" button) ──
+function orderProduct(serviceName) {
+  const orderSection = document.getElementById('order');
+  if (orderSection) orderSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  setTimeout(() => {
+    selectService(serviceName);
+    const input = document.getElementById('serviceSearch');
+    if (input) input.focus();
+  }, 500);
+}
+
+function updateDurationOptions(serviceName) {
+  const svc = findService(serviceName);
+  const sel = document.getElementById('duration');
+  const currentVal = sel.value;
+  if (!serviceName) {
+    sel.innerHTML = '<option value="">— Select a service first —</option>';
+    sel.disabled = true; sel.value = ''; return;
+  }
+  sel.disabled = false;
+  const durations = getDurationsFor(svc);
+  sel.innerHTML = '<option value="">— Select Duration —</option>' +
+    durations.map(d => `<option value="${d}">${DURATION_LABELS[d] || d + ' Months'}</option>`).join('');
+  sel.value = durations.includes(currentVal) ? currentVal : '';
+}
+
+function updateAccountTypeOptions(serviceName, duration) {
+  const svc = findService(serviceName);
+  const sel = document.getElementById('accountType');
+  const currentVal = sel.value;
+  if (!serviceName) {
+    sel.innerHTML = '<option value="">— Select a service first —</option>';
+    sel.disabled = true; sel.value = ''; return;
+  }
+  sel.disabled = false;
+  const typesToShow = getTypesFor(svc, duration);
+  sel.innerHTML = '<option value="">— Select Type —</option>' +
+    typesToShow.map(t => `<option value="${t}">${TYPE_LABELS[t] || t}</option>`).join('');
+  sel.value = typesToShow.includes(currentVal) ? currentVal : '';
+}
+
+const searchInput = document.getElementById('serviceSearch');
+const serviceDropdown = document.getElementById('serviceDropdown');
+const hiddenService = document.getElementById('selectedService');
+let searchDebounce = null;
+
+if (searchInput) {
+  searchInput.addEventListener('input', () => {
+    clearTimeout(searchDebounce);
+    searchDebounce = setTimeout(() => {
+      const q = searchInput.value.trim().toLowerCase();
+      if (hiddenService.value && hiddenService.value.toLowerCase() !== q) {
+        hiddenService.value = '';
+        updateDurationOptions(null);
+        updateAccountTypeOptions(null);
+        updatePreview();
+      }
+      if (!q) { serviceDropdown.style.display = 'none'; searchInput.setAttribute('aria-expanded','false'); return; }
+      const matches = SERVICES.filter(s => s.name.toLowerCase().includes(q) || s.cat.toLowerCase().includes(q));
+      if (!matches.length) {
+        serviceDropdown.innerHTML = '<div class="no-results">No matching services. Try a different keyword or message us directly.</div>';
+        serviceDropdown.style.display = 'block';
+        searchInput.setAttribute('aria-expanded','true');
+        return;
+      }
+      serviceDropdown.innerHTML = matches.map(s => `<div class="dd-item" onclick="selectService('${s.name.replace(/'/g,"\\'")}')"><span>${s.icon}</span><span>${s.name}</span><span class="dd-cat">${s.cat}</span></div>`).join('');
+      serviceDropdown.style.display = 'block';
+      searchInput.setAttribute('aria-expanded','true');
+    }, 120);
+  });
+
+  document.addEventListener('click', e => { if (!e.target.closest('.search-wrapper')) serviceDropdown.style.display = 'none'; });
+}
+
+function selectService(name) {
+  searchInput.value = name;
+  hiddenService.value = name;
+  serviceDropdown.style.display = 'none';
+  searchInput.setAttribute('aria-expanded','false');
+  clearFieldError('serviceError');
+  updateDurationOptions(name);
+  updateAccountTypeOptions(name, '');
+  updatePreview();
+}
+
+const durationSelect = document.getElementById('duration');
+if (durationSelect) {
+  durationSelect.addEventListener('change', () => {
+    clearFieldError('durationError');
+    updateAccountTypeOptions(hiddenService.value, durationSelect.value);
+    updatePreview();
+  });
+}
+
+function getPrice() {
+  const svcName = hiddenService.value;
+  const dur = document.getElementById('duration').value;
+  const type = document.getElementById('accountType').value;
+  if (!svcName || !dur || !type) return null;
+  const svc = findService(svcName);
+  if (!svc || !svc.pricing[dur]) return null;
+  return svc.pricing[dur][type] || null;
+}
+
+function updatePreview() {
+  const fb    = document.getElementById('fbname').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const source= document.getElementById('source').value;
+  const svc   = hiddenService.value;
+  const dur   = document.getElementById('duration').value;
+  const type  = document.getElementById('accountType').value;
+  const notes = document.getElementById('notes').value.trim();
+  const preview = document.getElementById('orderPreview');
+  const emptyState = document.getElementById('orderEmptyState');
+
+  if (!svc) { preview.classList.remove('visible'); emptyState.style.display = 'flex'; return; }
+  emptyState.style.display = 'none';
+  preview.classList.add('visible');
+  document.getElementById('previewName').textContent = fb || '—';
+  document.getElementById('previewPhone').textContent = phone || '—';
+  document.getElementById('previewSource').textContent = source || '—';
+  document.getElementById('previewService').textContent = svc || '—';
+  document.getElementById('previewDuration').textContent = DURATION_LABELS[dur] || '—';
+  document.getElementById('previewType').textContent = TYPE_LABELS[type] || '—';
+  const notesRow = document.getElementById('previewNotesRow');
+  if (notes) { notesRow.style.display = 'flex'; document.getElementById('previewNotes').textContent = notes; }
+  else { notesRow.style.display = 'none'; }
+  const price = getPrice();
+  document.getElementById('previewPrice').textContent = price ? '₱' + price.toLocaleString() : '';
+}
+
+['fbname','phone','source','duration','accountType','notes'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) { el.addEventListener('change', updatePreview); el.addEventListener('input', updatePreview); }
+});
+
+function showFieldError(errId, inputId) {
+  const errEl = document.getElementById(errId);
+  if (errEl) errEl.classList.add('visible');
+  if (inputId) { const el = document.getElementById(inputId); if (el) el.classList.add('invalid'); }
+}
+function clearFieldError(errId, inputId) {
+  const errEl = document.getElementById(errId);
+  if (errEl) errEl.classList.remove('visible');
+  if (inputId) { const el = document.getElementById(inputId); if (el) el.classList.remove('invalid'); }
+}
+const CLEAR_ON_INPUT = { serviceSearch:'serviceError', fbname:'fbnameError', phone:'phoneError' };
+Object.keys(CLEAR_ON_INPUT).forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('input', () => clearFieldError(CLEAR_ON_INPUT[id], id));
+});
+
+function showToast(message, isError) {
+  let toast = document.getElementById('appToast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'appToast';
+    toast.className = 'toast';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = message;
+  toast.classList.toggle('error', !!isError);
+  toast.classList.add('visible');
+  clearTimeout(toast._hideTimer);
+  toast._hideTimer = setTimeout(() => toast.classList.remove('visible'), 2600);
+}
+
+function buildSummaryText() {
+  const fb    = document.getElementById('fbname').value.trim() || '—';
+  const phone = document.getElementById('phone').value.trim() || '—';
+  const source= document.getElementById('source').value || '—';
+  const svc   = hiddenService.value || '—';
+  const dur   = DURATION_LABELS[document.getElementById('duration').value] || '—';
+  const type  = TYPE_LABELS[document.getElementById('accountType').value] || '—';
+  const notes = document.getElementById('notes').value.trim() || 'None';
+  const price = getPrice();
+  return `Messenger Name: ${fb}\nPhone Number: ${phone}\nSource: ${source}\nService: ${svc}\nDuration: ${dur}\nAccount Type: ${type}\nPrice: ${price ? '₱'+price.toLocaleString() : '—'}\nNotes: ${notes}`;
+}
+
+async function copyOrderSummary() {
+  const text = buildSummaryText();
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      showToast('✅ Order summary copied!');
+      return;
+    }
+    throw new Error('Clipboard API unavailable');
+  } catch (err) {
+    try {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly','');
+      ta.style.position = 'fixed';
+      ta.style.top = '-1000px';
+      ta.style.left = '-1000px';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      ta.setSelectionRange(0, text.length);
+      const ok = document.execCommand('copy');
+      document.body.removeChild(ta);
+      if (ok) showToast('✅ Order summary copied!');
+      else throw new Error('execCommand failed');
+    } catch (fallbackErr) {
+      showToast('⚠️ Could not copy automatically — please select and copy manually.', true);
+    }
+  }
+}
+
+function submitOrder() {
+  const fb    = document.getElementById('fbname').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const source= document.getElementById('source').value;
+  const svc   = hiddenService.value;
+  const dur   = document.getElementById('duration').value;
+  const type  = document.getElementById('accountType').value;
+  const notes = document.getElementById('notes').value.trim();
+
+  ['serviceError','durationError','accountTypeError','fbnameError','phoneError'].forEach(id => clearFieldError(id));
+  ['serviceSearch','duration','accountType','fbname','phone'].forEach(id => document.getElementById(id).classList.remove('invalid'));
+
+  let hasError = false;
+  if (!svc)  { showFieldError('serviceError','serviceSearch'); hasError = true; }
+  if (!dur)  { showFieldError('durationError','duration'); hasError = true; }
+  if (!type) { showFieldError('accountTypeError','accountType'); hasError = true; }
+  if (!fb)   { showFieldError('fbnameError','fbname'); hasError = true; }
+  const phoneDigits = phone.replace(/\D/g,'');
+  if (!phone || phoneDigits.length < 10) { showFieldError('phoneError','phone'); hasError = true; }
+
+  if (hasError) { showToast('⚠️ Please complete all required fields.', true); return; }
+
+  const price = getPrice();
+  const priceText = price ? `₱${price.toLocaleString()}` : 'To be confirmed';
+  const msg = `Hi RV Premiums! I'd like to place an order.\n\n━━━━━━━━━━━━━━\nORDER DETAILS\n━━━━━━━━━━━━━━\nMessenger Name: ${fb}\nPhone Number: ${phone}\nSource: ${source || 'Not specified'}\nService: ${svc}\nDuration: ${DURATION_LABELS[dur]}\nAccount Type: ${TYPE_LABELS[type]}\nPrice: ${priceText}\nNotes: ${notes || 'None'}\n━━━━━━━━━━━━━━\n\nPlease send GCash details. Thank you!`;
+  const encodedMsg = encodeURIComponent(msg);
+  window.open(`https://m.me/688533457667560?text=${encodedMsg}`, '_blank', 'noopener');
+}
+
+// ── Hook every existing "Order" / "Message to Order" button on the page into the form ──
+// (No need to edit each product/AI-tool card individually — this reads the
+// product name straight off the card and pre-fills the order form with it.)
+document.querySelectorAll('.btn-order:not(.btn-order-direct)').forEach(btn => {
+  btn.addEventListener('click', function(e) {
+    e.preventDefault();
+    const card = this.closest('.product-card');
+    const nameEl = card ? card.querySelector('.product-name') : null;
+    if (nameEl) orderProduct(nameEl.textContent.trim());
+  });
+});
+document.querySelectorAll('.ai-tool-order').forEach(btn => {
+  btn.addEventListener('click', function(e) {
+    e.preventDefault();
+    const card = this.closest('.ai-tool-card');
+    const nameEl = card ? card.querySelector('.ai-tool-name') : null;
+    if (nameEl) orderProduct(nameEl.textContent.trim());
+  });
+});
+// Mid-page banner button already points to #order via href, nothing to hook there.
 </script>
 </body>
 </html>
