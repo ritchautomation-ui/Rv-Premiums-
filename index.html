@@ -7,24 +7,24 @@
 <meta name="description" content="RV Premiums — Premium streaming, music, design tools & AI software at unbeatable prices. Fast delivery, trusted reseller. GCash accepted.">
 <meta property="og:title" content="RV Premiums | Affordable AI Tools & Digital Access">
 <meta property="og:description" content="Premium streaming, music, design tools & AI software at unbeatable prices. GCash accepted. Trusted since 2021 — 1,000+ happy clients.">
-<meta property="og:image" content="https://rv-premiums.vercel.app/logo.jpg">
+<meta property="og:image" content="https://rv-premiums.vercel.app/logo.png">
 <meta property="og:url" content="https://rv-premiums.vercel.app/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="RV Premiums">
 <meta property="og:locale" content="en_PH">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" type="image/png" href="logo.jpg">
-<link rel="shortcut icon" href="logo.jpg" type="image/png">
-<link rel="apple-touch-icon" href="logo.jpg">
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="shortcut icon" href="logo.png" type="image/png">
+<link rel="apple-touch-icon" href="logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --red: #C8102E; --red-dark: #8B0A1E; --red-light: #FF1A3D;
-  --black: #0A0A0A; --black-2: #141414; --black-3: #1E1E1E; --black-4: #2A2A2A;
-  --white: #FFFFFF; --gray: #888; --gray-light: #BBBBBB;
-  --gold: #FFD700; --green: #22c55e;
+  --red: #9E2626; --red-dark: #6B1818; --red-light: #C43D3D;
+  --black: #14100D; --black-2: #1C1712; --black-3: #241E17; --black-4: #2E271D;
+  --white: #F3EEE2; --gray: #9C9284; --gray-light: #C9C0AF;
+  --gold: #D9B25C; --green: #4CAF6B;
   --font-display: 'Bebas Neue', sans-serif;
   --font-body: 'Outfit', sans-serif;
 }
@@ -40,7 +40,7 @@ body { background: var(--black); color: var(--white); font-family: var(--font-bo
 .top-bar .pulse-dot { width: 8px; height: 8px; background: #fff; border-radius: 50%; animation: pulse 1.4s infinite; flex-shrink: 0; }
 .top-bar .tag { background: rgba(0,0,0,.25); padding: 2px 10px; border-radius: 100px; font-family: var(--font-display); font-size: 15px; letter-spacing: 2px; }
 .top-bar .countdown { background: rgba(0,0,0,.3); padding: 2px 12px; border-radius: 6px; font-family: var(--font-display); font-size: 16px; letter-spacing: 3px; color: var(--gold); min-width: 90px; display: inline-block; }
-@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.7)} }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.55;transform:scale(.88)} }
 
 /* NAV */
 nav {
@@ -57,7 +57,49 @@ nav {
 .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
 .nav-links a { color: var(--gray-light); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .2s; }
 .nav-links a:hover { color: var(--white); }
-.nav-cta { background: var(--red) !important; color: white !important; padding: 9px 22px; border-radius: 7px; font-weight: 700 !important; animation: navPulse 2s infinite; }
+.nav-cta { background: var(--red) !important; color: white !important; padding: 9px 22px; border-radius: 7px; font-weight: 700 !important; transition: transform .2s, box-shadow .2s; }
+.nav-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(158,38,38,.4); }
+
+/* NAV DROPDOWN */
+.nav-item-drop { position: relative; }
+.nav-drop-trigger { display: flex; align-items: center; gap: 5px; background: none; border: none; color: var(--gray-light); font-family: var(--font-body); font-size: 14px; font-weight: 500; cursor: pointer; padding: 4px 0; transition: color .2s; }
+.nav-drop-trigger:hover { color: var(--white); }
+.nav-drop-trigger .chev { font-size: 9px; transition: transform .2s; display: inline-block; }
+.nav-item-drop.open .nav-drop-trigger .chev { transform: rotate(180deg); }
+.nav-item-drop.open .nav-drop-trigger { color: var(--white); }
+.nav-dropdown-menu {
+  position: absolute; top: calc(100% + 16px); left: 50%; transform: translateX(-50%) translateY(-8px);
+  background: var(--black-3); border: 1px solid rgba(255,255,255,.08); border-radius: 12px;
+  padding: 10px; min-width: 220px; box-shadow: 0 20px 44px rgba(0,0,0,.5);
+  opacity: 0; pointer-events: none; transition: opacity .18s ease, transform .18s ease;
+  z-index: 300;
+}
+.nav-item-drop.open .nav-dropdown-menu { opacity: 1; pointer-events: all; transform: translateX(-50%) translateY(0); }
+.nav-dropdown-menu a { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 8px; font-size: 13.5px; color: var(--gray-light); transition: background .15s, color .15s; }
+.nav-dropdown-menu a:hover { background: rgba(158,38,38,.14); color: var(--white); }
+.nav-dropdown-menu .drop-icon { font-size: 15px; flex-shrink: 0; }
+
+/* MOBILE HAMBURGER + MENU */
+.hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; border-radius: 8px; transition: background .2s; }
+.hamburger:hover { background: rgba(255,255,255,.06); }
+.hamburger span { width: 22px; height: 2px; background: var(--white); border-radius: 2px; transition: transform .3s, opacity .3s; transform-origin: center; }
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.mobile-menu {
+  display: flex; flex-direction: column; position: fixed; inset: 68px 0 0; background: rgba(12,9,7,.98);
+  backdrop-filter: blur(18px); z-index: 199; overflow-y: auto;
+  opacity: 0; pointer-events: none; transform: translateY(-10px); transition: opacity .3s ease, transform .3s ease;
+  border-top: 1px solid rgba(255,255,255,.06); padding: 8px 0 24px;
+}
+.mobile-menu.open { opacity: 1; pointer-events: all; transform: translateY(0); }
+.mobile-menu a, .mobile-menu-label { display: block; padding: 14px 24px; font-size: 15px; font-weight: 600; color: var(--gray-light); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.05); }
+.mobile-menu-label { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--red-light); font-weight: 700; padding-top: 20px; padding-bottom: 6px; border-bottom: none; }
+.mobile-menu a:active, .mobile-menu a:hover { color: var(--white); background: rgba(255,255,255,.04); }
+.mobile-menu a.mobile-cta { margin: 16px 24px 0; background: var(--red); color: white; border-radius: 10px; text-align: center; border-bottom: none; }
+@media (max-width: 900px) {
+  .hamburger { display: flex; }
+}
 @keyframes navPulse { 0%,100%{box-shadow:0 0 0 0 rgba(200,16,46,.6)} 50%{box-shadow:0 0 0 8px rgba(200,16,46,0)} }
 
 /* HERO */
@@ -67,7 +109,7 @@ nav {
 .hero-content { position: relative; z-index: 2; max-width: 680px; }
 .live-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(34,197,94,.1); border: 1px solid rgba(34,197,94,.3); color: var(--green); font-size: 12px; font-weight: 600; padding: 5px 14px; border-radius: 100px; margin-bottom: 14px; }
 .live-badge .dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: pulse 1s infinite; }
-.hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(200,16,46,.15); border: 1px solid rgba(200,16,46,.4); color: #FF6080; font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; padding: 6px 14px; border-radius: 100px; margin-bottom: 24px; }
+.hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(200,16,46,.15); border: 1px solid rgba(200,16,46,.4); color: var(--red-light); font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; padding: 6px 14px; border-radius: 100px; margin-bottom: 24px; }
 .hero-badge::before { content: ''; width: 6px; height: 6px; background: var(--red-light); border-radius: 50%; animation: pulse 1.5s infinite; }
 .hero h1 { font-family: var(--font-display); font-size: clamp(54px, 8.5vw, 108px); line-height: .92; letter-spacing: 3px; margin-bottom: 8px; }
 .hero h1 .accent { color: var(--red); }
@@ -91,7 +133,7 @@ nav {
 .tool-card:hover { border-color: rgba(200,16,46,.45); }
 .tool-card-icon { width: 36px; height: 36px; background: rgba(200,16,46,.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; margin-bottom: 10px; }
 .tool-card-name { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
-.tool-card-price { font-size: 12px; color: #FF6080; font-weight: 500; }
+.tool-card-price { font-size: 12px; color: var(--red-light); font-weight: 500; }
 .tool-card.large { grid-column: span 2; display: flex; align-items: center; gap: 14px; padding: 14px 16px; background: rgba(34,197,94,.07); border-color: rgba(34,197,94,.2); }
 
 /* SOCIAL PROOF BAR */
@@ -104,7 +146,7 @@ nav {
 
 /* MARQUEE */
 .marquee-section { overflow: hidden; padding: 18px 0; background: rgba(200,16,46,.08); border-top: 1px solid rgba(200,16,46,.2); border-bottom: 1px solid rgba(200,16,46,.2); }
-.marquee-track { display: flex; gap: 60px; animation: marquee 22s linear infinite; width: max-content; }
+.marquee-track { display: flex; gap: 60px; animation: marquee 45s linear infinite; width: max-content; }
 .marquee-item { font-family: var(--font-display); font-size: 14px; letter-spacing: 3px; color: rgba(255,255,255,.5); white-space: nowrap; display: flex; align-items: center; gap: 60px; }
 .marquee-item::after { content: '●'; color: var(--red); font-size: 7px; }
 @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
@@ -208,15 +250,15 @@ footer { background: var(--black); border-top: 1px solid rgba(255,255,255,.06); 
 .ai-tool-name { font-weight: 700; font-size: 14px; }
 .ai-tool-cat { font-size: 11px; color: var(--gray); text-transform: uppercase; letter-spacing: .8px; }
 .ai-tool-desc { font-size: 12px; color: var(--gray); line-height: 1.5; }
-.ai-tool-order { margin-top: auto; background: transparent; border: 1px solid rgba(200,16,46,.4); color: #FF6080; padding: 7px 14px; border-radius: 7px; font-size: 12px; font-weight: 700; text-decoration: none; text-align: center; transition: all .2s; display: block; }
+.ai-tool-order { margin-top: auto; background: transparent; border: 1px solid rgba(200,16,46,.4); color: var(--red-light); padding: 7px 14px; border-radius: 7px; font-size: 12px; font-weight: 700; text-decoration: none; text-align: center; transition: all .2s; display: block; }
 .ai-tool-order:hover { background: var(--red); color: white; border-color: var(--red); }
 
 /* FLOATING MESSENGER */
 .fab-wrapper { position: fixed; bottom: 28px; right: 28px; z-index: 999; display: flex; align-items: center; }
-.fab-messenger { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #0084ff, #0059b2); display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 6px 24px rgba(0,132,255,.5); animation: fabPulse 2.5s infinite; transition: transform .2s; }
+.fab-messenger { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #0084ff, #0059b2); display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 6px 20px rgba(0,132,255,.35); animation: fabPulse 4s infinite; transition: transform .2s; }
 .fab-messenger:hover { transform: scale(1.1); }
 .fab-messenger svg { width: 28px; height: 28px; fill: white; }
-@keyframes fabPulse { 0%,100%{box-shadow:0 6px 24px rgba(0,132,255,.5)} 50%{box-shadow:0 6px 32px rgba(0,132,255,.85)} }
+@keyframes fabPulse { 0%,100%{box-shadow:0 6px 20px rgba(0,132,255,.35)} 50%{box-shadow:0 6px 24px rgba(0,132,255,.55)} }
 .fab-tooltip { position: absolute; right: 72px; background: var(--black-2); color: white; font-size: 12px; font-weight: 600; padding: 8px 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,.1); white-space: nowrap; opacity: 0; transform: translateX(8px); transition: all .3s; pointer-events: none; }
 .fab-wrapper:hover .fab-tooltip { opacity: 1; transform: translateX(0); }
 
@@ -289,7 +331,7 @@ footer { background: var(--black); border-top: 1px solid rgba(255,255,255,.06); 
   position:absolute;
   width:100%;
   height:100%;
-  animation:orbitSpin 32s linear infinite;
+  animation:orbitSpin 55s linear infinite;
 }
 
 .sc-bubble{
@@ -454,7 +496,7 @@ footer { background: var(--black); border-top: 1px solid rgba(255,255,255,.06); 
 .product-desc { margin-bottom: 16px; }
 .price-tier { display: flex; flex-direction: column; gap: 6px; }
 .price-tier + .price-tier { margin-top: 12px; }
-.tier-label { font-size: 11px; font-weight: 700; color: #FF6080; text-transform: uppercase; letter-spacing: .06em; }
+.tier-label { font-size: 11px; font-weight: 700; color: var(--red-light); text-transform: uppercase; letter-spacing: .06em; }
 .tier-chips { display: flex; flex-wrap: wrap; gap: 6px; }
 .chip { font-size: 11.5px; color: var(--gray-light); background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.09); padding: 4px 9px; border-radius: 6px; white-space: nowrap; line-height: 1.3; }
 
@@ -494,20 +536,60 @@ footer { background: var(--black); border-top: 1px solid rgba(255,255,255,.06); 
 <nav id="main-nav">
   <a href="#" class="nav-logo">
     <div class="nav-logo-mark">
-      <img src="logo.jpg" class="brand-logo-img" alt="RV Premiums Logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <img src="logo.png" class="brand-logo-img" alt="RV Premiums Logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
       <span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;font-family:var(--font-display);font-size:17px;color:white;">RV</span>
     </div>
     <span class="nav-logo-text">RV <span>PREMIUMS</span></span>
   </a>
   <ul class="nav-links">
-    <li><a href="#products">Streaming</a></li>
-    <li><a href="#aitools">AI Tools</a></li>
+    <li class="nav-item-drop" id="dropProducts">
+      <button class="nav-drop-trigger" onclick="toggleNavDrop(event,'dropProducts')">Products <span class="chev">▾</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="#streaming"><span class="drop-icon">🎬</span> Streaming & Video</a>
+        <a href="#music"><span class="drop-icon">🎵</span> Music & Audio</a>
+        <a href="#design"><span class="drop-icon">🎨</span> Design & Tools</a>
+      </div>
+    </li>
+    <li class="nav-item-drop" id="dropAI">
+      <button class="nav-drop-trigger" onclick="toggleNavDrop(event,'dropAI')">AI Tools <span class="chev">▾</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="#aitools" onclick="goToAICategory(event,'research')"><span class="drop-icon">📚</span> Research & Academic</a>
+        <a href="#aitools" onclick="goToAICategory(event,'humanize')"><span class="drop-icon">🛡️</span> AI Humanization</a>
+        <a href="#aitools" onclick="goToAICategory(event,'study')"><span class="drop-icon">🎓</span> Study & Learning</a>
+        <a href="#aitools" onclick="goToAICategory(event,'content')"><span class="drop-icon">🎨</span> Content Creation</a>
+        <a href="#aitools" onclick="goToAICategory(event,'productivity2')"><span class="drop-icon">⚡</span> Productivity</a>
+        <a href="#aitools" onclick="goToAICategory(event,'writing')"><span class="drop-icon">✍️</span> AI Writing</a>
+      </div>
+    </li>
     <li><a href="#order">Order</a></li>
     <li><a href="#how">How It Works</a></li>
     <li><a href="#reviews">Reviews</a></li>
     <li><a href="#order" class="nav-cta">💬 Order Now</a></li>
   </ul>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" onclick="toggleMobileMenu()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-label">Products</div>
+  <a href="#streaming" onclick="closeMobileMenu()">🎬 Streaming & Video</a>
+  <a href="#music" onclick="closeMobileMenu()">🎵 Music & Audio</a>
+  <a href="#design" onclick="closeMobileMenu()">🎨 Design & Tools</a>
+  <div class="mobile-menu-label">AI Tools</div>
+  <a href="#aitools" onclick="goToAICategory(event,'research');closeMobileMenu()">📚 Research & Academic</a>
+  <a href="#aitools" onclick="goToAICategory(event,'humanize');closeMobileMenu()">🛡️ AI Humanization</a>
+  <a href="#aitools" onclick="goToAICategory(event,'study');closeMobileMenu()">🎓 Study & Learning</a>
+  <a href="#aitools" onclick="goToAICategory(event,'content');closeMobileMenu()">🎨 Content Creation</a>
+  <a href="#aitools" onclick="goToAICategory(event,'productivity2');closeMobileMenu()">⚡ Productivity</a>
+  <a href="#aitools" onclick="goToAICategory(event,'writing');closeMobileMenu()">✍️ AI Writing</a>
+  <div class="mobile-menu-label">More</div>
+  <a href="#order" onclick="closeMobileMenu()">📋 Order</a>
+  <a href="#how" onclick="closeMobileMenu()">How It Works</a>
+  <a href="#reviews" onclick="closeMobileMenu()">Reviews</a>
+  <a href="#order" class="mobile-cta" onclick="closeMobileMenu()">💬 Order Now</a>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -536,7 +618,7 @@ footer { background: var(--black); border-top: 1px solid rgba(255,255,255,.06); 
   <div class="orbit-ring ring2"></div>
 
   <div class="sc-center">
-    <img src="logo.jpg" class="sc-center-img" alt="RV Premiums" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <img src="logo.png" class="sc-center-img" alt="RV Premiums" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
     <span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;font-family:var(--font-display);font-size:42px;letter-spacing:2px;color:#ff204f;">RV</span>
   </div>
 
@@ -687,10 +769,10 @@ footer { background: var(--black); border-top: 1px solid rgba(255,255,255,.06); 
   <h2 class="section-title">STREAMING <span style="color:var(--red)">SERVICES</span></h2>
   <p class="section-desc">Premium video streaming access at unbeatable prices. Multiple screens available.</p>
   <div class="products-grid fade-up">
-    <div class="product-card popular-product"><div class="product-thumb" style="background:linear-gradient(135deg,#8B0000,#1a0000)"><img src="netflix.png" alt="Netflix" class="thumb-logo" loading="lazy" decoding="async" onerror="this.remove()"><div style="font-size:52px;position:relative;z-index:1">🎬</div><div class="product-cat-badge">Streaming</div></div><div class="product-body"><div class="product-name">NETFLIX</div><div class="product-desc"><div class="price-tier"><span class="tier-label">1 Screen</span><div class="tier-chips"><span class="chip">₱99/mo</span><span class="chip">₱289/3mo</span><span class="chip">₱499/6mo</span><span class="chip">₱899/yr</span></div></div><div class="price-tier"><span class="tier-label">2 Screens</span><div class="tier-chips"><span class="chip">₱179/mo</span><span class="chip">₱449/3mo</span><span class="chip">₱699/6mo</span><span class="chip">₱1,199/yr</span></div></div></div><div class="product-footer"><div class="product-price">₱99 <span>/ 1 screen</span></div><a href="https://www.facebook.com/messages/t/688533457667560" target="_blank" class="btn-order">Order →</a></div></div></div>
-    <div class="product-card"><div class="product-thumb" style="background:linear-gradient(135deg,#003580,#001133)"><img src="disney.png" alt="Disney+" class="thumb-logo" loading="lazy" decoding="async" onerror="this.remove()"><div style="font-size:52px;position:relative;z-index:1">✨</div><div class="product-cat-badge">Streaming</div></div><div class="product-body"><div class="product-name">DISNEY+</div><div class="product-desc"><div class="price-tier"><span class="tier-label">1 Screen</span><div class="tier-chips"><span class="chip">₱109/mo</span><span class="chip">₱279/3mo</span><span class="chip">₱489/6mo</span><span class="chip">₱899/yr</span></div></div><div class="price-tier"><span class="tier-label">2 Screens</span><div class="tier-chips"><span class="chip">₱169/mo</span><span class="chip">₱439/3mo</span><span class="chip">₱699/6mo</span><span class="chip">₱1,199/yr</span></div></div></div><div class="product-footer"><div class="product-price">₱109 <span>/ 1 screen</span></div><a href="https://www.facebook.com/messages/t/688533457667560" target="_blank" class="btn-order">Order →</a></div></div></div>
-    <div class="product-card"><div class="product-thumb" style="background:linear-gradient(135deg,#0f3460,#16213e)"><img src="primevideo.png" alt="Prime Video" class="thumb-logo" loading="lazy" decoding="async" onerror="this.remove()"><div style="font-size:52px;position:relative;z-index:1">📦</div><div class="product-cat-badge">Streaming</div></div><div class="product-body"><div class="product-name">PRIME VIDEO</div><div class="product-desc"><div class="price-tier"><span class="tier-label">6 Screens</span><div class="tier-chips"><span class="chip">₱120/mo</span><span class="chip">₱299/3mo</span><span class="chip">₱599/6mo</span><span class="chip">₱1,099/yr</span></div></div></div><div class="product-footer"><div class="product-price">₱120 <span>/ 6 screens</span></div><a href="https://www.facebook.com/messages/t/688533457667560" target="_blank" class="btn-order">Order →</a></div></div></div>
-    <div class="product-card"><div class="product-thumb" style="background:linear-gradient(135deg,#1a0a2e,#0d0618)"><img src="hbomax.png" alt="Hbo Max" class="thumb-logo" loading="lazy" decoding="async" onerror="this.remove()"><div style="font-size:52px;position:relative;z-index:1">💜</div><div class="product-cat-badge">Streaming</div></div><div class="product-body"><div class="product-name">HBO MAX</div><div class="product-desc"><div class="price-tier"><span class="tier-label">1 Screen</span><div class="tier-chips"><span class="chip">₱99/mo</span><span class="chip">₱259/3mo</span><span class="chip">₱399/6mo</span><span class="chip">₱899/yr</span></div></div><div class="price-tier"><span class="tier-label">6 Screens</span><div class="tier-chips"><span class="chip">₱249/mo</span><span class="chip">₱599/3mo</span><span class="chip">₱1,499/6mo</span></div></div></div><div class="product-footer"><div class="product-price">₱99 <span>/ 1 screen</span></div><a href="https://www.facebook.com/messages/t/688533457667560" target="_blank" class="btn-order">Order →</a></div></div></div>
+    <div class="product-card popular-product"><div class="product-thumb" style="background:linear-gradient(135deg,#8B0000,#1a0000)"><img src="netflix.png" alt="Netflix" class="thumb-logo" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div style="font-size:52px;position:relative;z-index:1;display:none">🎬</div><div class="product-cat-badge">Streaming</div></div><div class="product-body"><div class="product-name">NETFLIX</div><div class="product-desc"><div class="price-tier"><span class="tier-label">1 Screen</span><div class="tier-chips"><span class="chip">₱99/mo</span><span class="chip">₱289/3mo</span><span class="chip">₱499/6mo</span><span class="chip">₱899/yr</span></div></div><div class="price-tier"><span class="tier-label">2 Screens</span><div class="tier-chips"><span class="chip">₱179/mo</span><span class="chip">₱449/3mo</span><span class="chip">₱699/6mo</span><span class="chip">₱1,199/yr</span></div></div></div><div class="product-footer"><div class="product-price">₱99 <span>/ 1 screen</span></div><a href="https://www.facebook.com/messages/t/688533457667560" target="_blank" class="btn-order">Order →</a></div></div></div>
+    <div class="product-card"><div class="product-thumb" style="background:linear-gradient(135deg,#003580,#001133)"><img src="disney.png" alt="Disney+" class="thumb-logo" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div style="font-size:52px;position:relative;z-index:1;display:none">✨</div><div class="product-cat-badge">Streaming</div></div><div class="product-body"><div class="product-name">DISNEY+</div><div class="product-desc"><div class="price-tier"><span class="tier-label">1 Screen</span><div class="tier-chips"><span class="chip">₱109/mo</span><span class="chip">₱279/3mo</span><span class="chip">₱489/6mo</span><span class="chip">₱899/yr</span></div></div><div class="price-tier"><span class="tier-label">2 Screens</span><div class="tier-chips"><span class="chip">₱169/mo</span><span class="chip">₱439/3mo</span><span class="chip">₱699/6mo</span><span class="chip">₱1,199/yr</span></div></div></div><div class="product-footer"><div class="product-price">₱109 <span>/ 1 screen</span></div><a href="https://www.facebook.com/messages/t/688533457667560" target="_blank" class="btn-order">Order →</a></div></div></div>
+    <div class="product-card"><div class="product-thumb" style="background:linear-gradient(135deg,#0f3460,#16213e)"><img src="primevideo.png" alt="Prime Video" class="thumb-logo" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div style="font-size:52px;position:relative;z-index:1;display:none">📦</div><div class="product-cat-badge">Streaming</div></div><div class="product-body"><div class="product-name">PRIME VIDEO</div><div class="product-desc"><div class="price-tier"><span class="tier-label">6 Screens</span><div class="tier-chips"><span class="chip">₱120/mo</span><span class="chip">₱299/3mo</span><span class="chip">₱599/6mo</span><span class="chip">₱1,099/yr</span></div></div></div><div class="product-footer"><div class="product-price">₱120 <span>/ 6 screens</span></div><a href="https://www.facebook.com/messages/t/688533457667560" target="_blank" class="btn-order">Order →</a></div></div></div>
+    <div class="product-card"><div class="product-thumb" style="background:linear-gradient(135deg,#1a0a2e,#0d0618)"><img src="hbomax.png" alt="Hbo Max" class="thumb-logo" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div style="font-size:52px;position:relative;z-index:1;display:none">💜</div><div class="product-cat-badge">Streaming</div></div><div class="product-body"><div class="product-name">HBO MAX</div><div class="product-desc"><div class="price-tier"><span class="tier-label">1 Screen</span><div class="tier-chips"><span class="chip">₱99/mo</span><span class="chip">₱259/3mo</span><span class="chip">₱399/6mo</span><span class="chip">₱899/yr</span></div></div><div class="price-tier"><span class="tier-label">6 Screens</span><div class="tier-chips"><span class="chip">₱249/mo</span><span class="chip">₱599/3mo</span><span class="chip">₱1,499/6mo</span></div></div></div><div class="product-footer"><div class="product-price">₱99 <span>/ 1 screen</span></div><a href="https://www.facebook.com/messages/t/688533457667560" target="_blank" class="btn-order">Order →</a></div></div></div>
     <div class="product-card"><div class="product-thumb" style="background:linear-gradient(135deg,#1a1200,#2d2000)"><div style="font-size:52px;position:relative;z-index:1">📺</div><div class="product-cat-badge">Streaming</div></div><div class="product-body"><div class="product-name">LOKLOK</div><div class="product-desc"><div class="price-tier"><span class="tier-label">1 Screen</span><div class="tier-chips"><span class="chip">₱99/mo</span><span class="chip">₱229/3mo</span><span class="chip">₱379/6mo</span><span class="chip">₱799/yr</span></div></div><div class="price-tier"><span class="tier-label">3 Screens</span><div class="tier-chips"><span class="chip">₱149/mo</span><span class="chip">₱599/3mo</span><span class="chip">₱999/6mo</span></div></div></div><div class="product-footer"><div class="product-price">₱99 <span>/ 1 screen</span></div><a href="https://www.facebook.com/messages/t/688533457667560" target="_blank" class="btn-order">Order →</a></div></div></div>
     <div class="product-card"><div class="product-thumb" style="background:linear-gradient(135deg,#001a0a,#002a10)"><div style="font-size:52px;position:relative;z-index:1">🌐</div><div class="product-cat-badge">Streaming</div></div><div class="product-body"><div class="product-name">VIU</div><div class="product-desc"><div class="price-tier"><span class="tier-label">4 Devices</span><div class="tier-chips"><span class="chip">₱139/mo</span><span class="chip">₱379/3mo</span><span class="chip">₱649/6mo</span><span class="chip">₱1,099/yr</span></div></div></div><div class="product-footer"><div class="product-price">₱139 <span>/ 4 devices</span></div><a href="https://www.facebook.com/messages/t/688533457667560" target="_blank" class="btn-order">Order →</a></div></div></div>
     <div class="product-card"><div class="product-thumb" style="background:linear-gradient(135deg,#2a0a0a,#1a0505)"><div style="font-size:52px;position:relative;z-index:1">🎞️</div><div class="product-cat-badge">Streaming</div></div><div class="product-body"><div class="product-name">VIVAMAX</div><div class="product-desc"><div class="price-tier"><span class="tier-label">1 Screen</span><div class="tier-chips"><span class="chip">₱99/mo</span><span class="chip">₱229/3mo</span><span class="chip">₱379/6mo</span><span class="chip">₱799/yr</span></div></div><div class="price-tier"><span class="tier-label">5 Screens</span><div class="tier-chips"><span class="chip">₱149/mo</span><span class="chip">₱349/3mo</span><span class="chip">₱599/6mo</span></div></div></div><div class="product-footer"><div class="product-price">₱99 <span>/ 1 screen</span></div><a href="https://www.facebook.com/messages/t/688533457667560" target="_blank" class="btn-order">Order →</a></div></div></div>
@@ -704,8 +786,8 @@ footer { background: var(--black); border-top: 1px solid rgba(255,255,255,.06); 
   <h2 class="section-title">MUSIC <span style="color:var(--red)">SERVICES</span></h2>
   <p class="section-desc">Stream music and videos without ads at the lowest prices.</p>
   <div class="products-grid fade-up">
-    <div class="product-card popular-product"><div class="product-thumb" style="background:linear-gradient(135deg,#1DB954,#0a3d1f)"><img src="spotify.png" alt="Spotify" class="thumb-logo" loading="lazy" decoding="async" onerror="this.remove()"><div style="font-size:52px;position:relative;z-index:1">🎵</div><div class="product-cat-badge">Music</div></div><div class="product-body"><div class="product-name">SPOTIFY</div><div class="product-desc"><div class="price-tier"><span class="tier-label">1-3 Screens</span><div class="tier-chips"><span class="chip">₱65/mo</span><span class="chip">₱399/6mo</span><span class="chip">₱799/yr</span></div></div></div><div class="product-footer"><div class="product-price">₱65 <span>/ month</span></div><a href="https://www.facebook.com/messages/t/688533457667560" target="_blank" class="btn-order">Order →</a></div></div></div>
-    <div class="product-card"><div class="product-thumb" style="background:linear-gradient(135deg,#FF0000,#6a0000)"><img src="youtube.png" alt="Youtube" class="thumb-logo" loading="lazy" decoding="async" onerror="this.remove()"><div style="font-size:52px;position:relative;z-index:1">▶️</div><div class="product-cat-badge">Video & Music</div></div><div class="product-body"><div class="product-name">YOUTUBE</div><div class="product-desc"><div class="price-tier"><span class="tier-label">1 Screen</span><div class="tier-chips"><span class="chip">₱49/mo</span><span class="chip">₱179/3mo</span><span class="chip">₱399/6mo</span><span class="chip">₱899/yr</span></div></div><div class="price-tier"><span class="tier-label">6 Screens</span><div class="tier-chips"><span class="chip">₱80/mo</span><span class="chip">₱230/3mo</span><span class="chip">₱400/6mo</span></div></div></div><div class="product-footer"><div class="product-price">₱49 <span>/ 1 screen</span></div><a href="https://www.facebook.com/messages/t/688533457667560" target="_blank" class="btn-order">Order →</a></div></div></div>
+    <div class="product-card popular-product"><div class="product-thumb" style="background:linear-gradient(135deg,#1DB954,#0a3d1f)"><img src="spotify.png" alt="Spotify" class="thumb-logo" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div style="font-size:52px;position:relative;z-index:1;display:none">🎵</div><div class="product-cat-badge">Music</div></div><div class="product-body"><div class="product-name">SPOTIFY</div><div class="product-desc"><div class="price-tier"><span class="tier-label">1-3 Screens</span><div class="tier-chips"><span class="chip">₱65/mo</span><span class="chip">₱399/6mo</span><span class="chip">₱799/yr</span></div></div></div><div class="product-footer"><div class="product-price">₱65 <span>/ month</span></div><a href="https://www.facebook.com/messages/t/688533457667560" target="_blank" class="btn-order">Order →</a></div></div></div>
+    <div class="product-card"><div class="product-thumb" style="background:linear-gradient(135deg,#FF0000,#6a0000)"><img src="youtube.png" alt="Youtube" class="thumb-logo" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div style="font-size:52px;position:relative;z-index:1;display:none">▶️</div><div class="product-cat-badge">Video & Music</div></div><div class="product-body"><div class="product-name">YOUTUBE</div><div class="product-desc"><div class="price-tier"><span class="tier-label">1 Screen</span><div class="tier-chips"><span class="chip">₱49/mo</span><span class="chip">₱179/3mo</span><span class="chip">₱399/6mo</span><span class="chip">₱899/yr</span></div></div><div class="price-tier"><span class="tier-label">6 Screens</span><div class="tier-chips"><span class="chip">₱80/mo</span><span class="chip">₱230/3mo</span><span class="chip">₱400/6mo</span></div></div></div><div class="product-footer"><div class="product-price">₱49 <span>/ 1 screen</span></div><a href="https://www.facebook.com/messages/t/688533457667560" target="_blank" class="btn-order">Order →</a></div></div></div>
     <div class="product-card"><div class="product-thumb" style="background:linear-gradient(135deg,#e91e63,#560a29)"><div style="font-size:52px;position:relative;z-index:1">🎶</div><div class="product-cat-badge">Music</div></div><div class="product-body"><div class="product-name">IWANTTFC</div><div class="product-desc"><div class="price-tier"><span class="tier-label">6 Screens</span><div class="tier-chips"><span class="chip">₱120/mo</span><span class="chip">₱299/3mo</span><span class="chip">₱599/6mo</span><span class="chip">₱1,099/yr</span></div></div></div><div class="product-footer"><div class="product-price">₱120 <span>/ 6 screens</span></div><a href="https://www.facebook.com/messages/t/688533457667560" target="_blank" class="btn-order">Order →</a></div></div></div>
   </div>
 </section>
@@ -716,11 +798,11 @@ footer { background: var(--black); border-top: 1px solid rgba(255,255,255,.06); 
   <h2 class="section-title">TOOLS & <span style="color:var(--red)">SOFTWARE</span></h2>
   <p class="section-desc">Design tools, AI writing assistants, and productivity apps — all at reseller rates.</p>
   <div class="products-grid fade-up">
-    <div class="product-card"><div class="product-thumb" style="background:linear-gradient(135deg,#7c3aed,#1a0a3d)"><img src="canva.png" alt="Canva" class="thumb-logo" loading="lazy" decoding="async" onerror="this.remove()"><div style="font-size:52px;position:relative;z-index:1">🖌️</div><div class="product-cat-badge">Design</div></div><div class="product-body"><div class="product-name">CANVA</div><div class="product-desc"><div class="price-tier"><span class="tier-label">4 Devices</span><div class="tier-chips"><span class="chip">₱50/mo</span><span class="chip">₱399/yr</span></div></div></div><div class="product-footer"><div class="product-price">₱50 <span>/ month</span></div><a href="https://www.facebook.com/messages/t/688533457667560" target="_blank" class="btn-order">Order →</a></div></div></div>
-    <div class="product-card"><div class="product-thumb" style="background:linear-gradient(135deg,#0050c0,#001433)"><img src="capcut.png" alt="Capcut" class="thumb-logo" loading="lazy" decoding="async" onerror="this.remove()"><div style="font-size:52px;position:relative;z-index:1">✂️</div><div class="product-cat-badge">Design</div></div><div class="product-body"><div class="product-name">CAPCUT</div><div class="product-desc"><div class="price-tier"><span class="tier-label">4 Devices</span><div class="tier-chips"><span class="chip">₱150/mo</span><span class="chip">₱399/3mo</span><span class="chip">₱699/6mo</span><span class="chip">₱1,199/yr</span></div></div></div><div class="product-footer"><div class="product-price">₱150 <span>/ month</span></div><a href="https://www.facebook.com/messages/t/688533457667560" target="_blank" class="btn-order">Order →</a></div></div></div>
-    <div class="product-card"><div class="product-thumb" style="background:linear-gradient(135deg,#00a651,#003d1e)"><img src="chatgpt.png" alt="C 6Pt Plus" class="thumb-logo" loading="lazy" decoding="async" onerror="this.remove()"><div style="font-size:52px;position:relative;z-index:1">🤖</div><div class="product-cat-badge">AI</div></div><div class="product-body"><div class="product-name">C 6PT PLUS</div><div class="product-desc"><div class="price-tier"><span class="tier-label">1 Screen</span><div class="tier-chips"><span class="chip">₱180/mo</span><span class="chip">₱499/3mo</span><span class="chip">₱899/6mo</span><span class="chip">₱1,599/yr</span></div></div><div class="price-tier"><span class="tier-label">5 Screens</span><div class="tier-chips"><span class="chip">₱880/mo</span><span class="chip">₱2,399/3mo</span></div></div></div><div class="product-footer"><div class="product-price">₱180 <span>/ 1 screen</span></div><a href="https://www.facebook.com/messages/t/688533457667560" target="_blank" class="btn-order">Order →</a></div></div></div>
-    <div class="product-card"><div class="product-thumb" style="background:linear-gradient(135deg,#00a651,#002d15)"><img src="chatgpt.png" alt="Chatgpt Go" class="thumb-logo" loading="lazy" decoding="async" onerror="this.remove()"><div style="font-size:52px;position:relative;z-index:1">💡</div><div class="product-cat-badge">AI</div></div><div class="product-body"><div class="product-name">CHATGPT GO</div><div class="product-desc"><div class="price-tier"><span class="tier-label">6 Screens</span><div class="tier-chips"><span class="chip">₱249/mo</span><span class="chip">₱699/3mo</span><span class="chip">₱1,299/6mo</span><span class="chip">₱2,299/yr</span></div></div></div><div class="product-footer"><div class="product-price">₱249 <span>/ 6 screens</span></div><a href="https://www.facebook.com/messages/t/688533457667560" target="_blank" class="btn-order">Order →</a></div></div></div>
-    <div class="product-card" id="productivity"><div class="product-thumb" style="background:linear-gradient(135deg,#1a1a2e,#0d0d1a)"><img src="grammarly.png" alt="Grammarly" class="thumb-logo" loading="lazy" decoding="async" onerror="this.remove()"><div style="font-size:52px;position:relative;z-index:1">📝</div><div class="product-cat-badge">Writing</div></div><div class="product-body"><div class="product-name">GRAMMARLY</div><div class="product-desc"><div class="price-tier"><span class="tier-label">1 Device/Shared</span><div class="tier-chips"><span class="chip">₱50/mo</span><span class="chip">₱129/3mo</span><span class="chip">₱229/6mo</span><span class="chip">₱399/yr</span></div></div></div><div class="product-footer"><div class="product-price">₱50 <span>/ month</span></div><a href="https://www.facebook.com/messages/t/688533457667560" target="_blank" class="btn-order">Order →</a></div></div></div>
+    <div class="product-card"><div class="product-thumb" style="background:linear-gradient(135deg,#7c3aed,#1a0a3d)"><img src="canva.png" alt="Canva" class="thumb-logo" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div style="font-size:52px;position:relative;z-index:1;display:none">🖌️</div><div class="product-cat-badge">Design</div></div><div class="product-body"><div class="product-name">CANVA</div><div class="product-desc"><div class="price-tier"><span class="tier-label">4 Devices</span><div class="tier-chips"><span class="chip">₱50/mo</span><span class="chip">₱399/yr</span></div></div></div><div class="product-footer"><div class="product-price">₱50 <span>/ month</span></div><a href="https://www.facebook.com/messages/t/688533457667560" target="_blank" class="btn-order">Order →</a></div></div></div>
+    <div class="product-card"><div class="product-thumb" style="background:linear-gradient(135deg,#0050c0,#001433)"><img src="capcut.png" alt="Capcut" class="thumb-logo" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div style="font-size:52px;position:relative;z-index:1;display:none">✂️</div><div class="product-cat-badge">Design</div></div><div class="product-body"><div class="product-name">CAPCUT</div><div class="product-desc"><div class="price-tier"><span class="tier-label">4 Devices</span><div class="tier-chips"><span class="chip">₱150/mo</span><span class="chip">₱399/3mo</span><span class="chip">₱699/6mo</span><span class="chip">₱1,199/yr</span></div></div></div><div class="product-footer"><div class="product-price">₱150 <span>/ month</span></div><a href="https://www.facebook.com/messages/t/688533457667560" target="_blank" class="btn-order">Order →</a></div></div></div>
+    <div class="product-card"><div class="product-thumb" style="background:linear-gradient(135deg,#00a651,#003d1e)"><img src="chatgpt.png" alt="C 6Pt Plus" class="thumb-logo" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div style="font-size:52px;position:relative;z-index:1;display:none">🤖</div><div class="product-cat-badge">AI</div></div><div class="product-body"><div class="product-name">C 6PT PLUS</div><div class="product-desc"><div class="price-tier"><span class="tier-label">1 Screen</span><div class="tier-chips"><span class="chip">₱180/mo</span><span class="chip">₱499/3mo</span><span class="chip">₱899/6mo</span><span class="chip">₱1,599/yr</span></div></div><div class="price-tier"><span class="tier-label">5 Screens</span><div class="tier-chips"><span class="chip">₱880/mo</span><span class="chip">₱2,399/3mo</span></div></div></div><div class="product-footer"><div class="product-price">₱180 <span>/ 1 screen</span></div><a href="https://www.facebook.com/messages/t/688533457667560" target="_blank" class="btn-order">Order →</a></div></div></div>
+    <div class="product-card"><div class="product-thumb" style="background:linear-gradient(135deg,#00a651,#002d15)"><img src="chatgpt.png" alt="Chatgpt Go" class="thumb-logo" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div style="font-size:52px;position:relative;z-index:1;display:none">💡</div><div class="product-cat-badge">AI</div></div><div class="product-body"><div class="product-name">CHATGPT GO</div><div class="product-desc"><div class="price-tier"><span class="tier-label">6 Screens</span><div class="tier-chips"><span class="chip">₱249/mo</span><span class="chip">₱699/3mo</span><span class="chip">₱1,299/6mo</span><span class="chip">₱2,299/yr</span></div></div></div><div class="product-footer"><div class="product-price">₱249 <span>/ 6 screens</span></div><a href="https://www.facebook.com/messages/t/688533457667560" target="_blank" class="btn-order">Order →</a></div></div></div>
+    <div class="product-card" id="productivity"><div class="product-thumb" style="background:linear-gradient(135deg,#1a1a2e,#0d0d1a)"><img src="grammarly.png" alt="Grammarly" class="thumb-logo" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div style="font-size:52px;position:relative;z-index:1;display:none">📝</div><div class="product-cat-badge">Writing</div></div><div class="product-body"><div class="product-name">GRAMMARLY</div><div class="product-desc"><div class="price-tier"><span class="tier-label">1 Device/Shared</span><div class="tier-chips"><span class="chip">₱50/mo</span><span class="chip">₱129/3mo</span><span class="chip">₱229/6mo</span><span class="chip">₱399/yr</span></div></div></div><div class="product-footer"><div class="product-price">₱50 <span>/ month</span></div><a href="https://www.facebook.com/messages/t/688533457667560" target="_blank" class="btn-order">Order →</a></div></div></div>
     <div class="product-card"><div class="product-thumb" style="background:linear-gradient(135deg,#2d1a00,#1a0f00)"><div style="font-size:52px;position:relative;z-index:1">📱</div><div class="product-cat-badge">Productivity</div></div><div class="product-body"><div class="product-name">IQIYI</div><div class="product-desc"><div class="price-tier"><span class="tier-label">4 Devices</span><div class="tier-chips"><span class="chip">₱139/mo</span><span class="chip">₱379/3mo</span><span class="chip">₱649/6mo</span><span class="chip">₱1,099/yr</span></div></div></div><div class="product-footer"><div class="product-price">₱139 <span>/ month</span></div><a href="https://www.facebook.com/messages/t/688533457667560" target="_blank" class="btn-order">Order →</a></div></div></div>
     <div class="product-card" style="border-color:rgba(200,16,46,.3);background:rgba(200,16,46,.04)"><div class="product-thumb" style="background:linear-gradient(135deg,#3d0010,#1a0008)"><div style="font-size:52px;position:relative;z-index:1">👀</div><div class="product-cat-badge">Unlisted</div></div><div class="product-body"><div class="product-name">Hindi Mo Nakita?</div><div class="product-desc" style="font-size:13px;color:var(--gray);line-height:1.6;margin-bottom:16px;">May hinahanap ka na wala sa listahan? Message us — we'll check availability and rates!</div><div class="product-footer"><div class="product-price" style="color:var(--red)">Ask Us!</div><a href="https://www.facebook.com/messages/t/688533457667560" target="_blank" class="btn-order btn-order-direct">Chat →</a></div></div></div>
   </div>
@@ -824,7 +906,7 @@ footer { background: var(--black); border-top: 1px solid rgba(255,255,255,.06); 
 
 <!-- MID CTA -->
 <div class="cta-section">
-  <h2>DON'T WAIT — <span style="color:#FFD700">ORDER NOW</span></h2>
+  <h2>DON'T WAIT — <span style="color:var(--gold)">ORDER NOW</span></h2>
   <p>Thousands of clients already enjoying affordable access. Join them today — instant delivery guaranteed after payment.</p>
   <div class="cta-btn-group">
     <a href="#order" class="btn-white">📋 Use Order Form</a>
@@ -920,7 +1002,7 @@ footer { background: var(--black); border-top: 1px solid rgba(255,255,255,.06); 
 
 <!-- FINAL CTA + CONTACT -->
 <div class="cta-section" id="contact">
-  <h2>READY TO <span style="color:#FFD700">ORDER?</span></h2>
+  <h2>READY TO <span style="color:var(--gold)">ORDER?</span></h2>
   <p>Reach out through any channel below. We respond fast and deliver even faster. GCash accepted.</p>
   <div class="cta-btn-group" style="margin-bottom:48px">
     <a href="https://www.facebook.com/messages/t/688533457667560" target="_blank" class="btn-white" style="font-size:17px;padding:18px 48px">💬 Message Us Now →</a>
@@ -936,7 +1018,7 @@ footer { background: var(--black); border-top: 1px solid rgba(255,255,255,.06); 
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo"><div class="footer-logo-mark">
-    <img src="logo.jpg" class="footer-logo-img" alt="RV Premiums Logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <img src="logo.png" class="footer-logo-img" alt="RV Premiums Logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
     <span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;font-family:var(--font-display);font-size:14px;color:white;">RV</span>
   </div><span class="footer-logo-name">RV PREMIUMS</span></div>
   <div class="footer-copy">© 2026 RV Premiums. Affordable AI for Everyone.</div>
@@ -973,8 +1055,43 @@ document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
 // NAV SCROLL
 const nav = document.getElementById('main-nav');
 window.addEventListener('scroll', () => {
-  nav.style.borderBottomColor = window.scrollY > 50 ? 'rgba(200,16,46,.55)' : 'rgba(200,16,46,.3)';
+  nav.style.borderBottomColor = window.scrollY > 50 ? 'rgba(158,38,38,.55)' : 'rgba(158,38,38,.3)';
 });
+
+// NAV DROPDOWNS (desktop hover-capable, click-toggle for touch)
+function toggleNavDrop(e, id) {
+  e.stopPropagation();
+  const item = document.getElementById(id);
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.nav-item-drop').forEach(d => d.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+document.addEventListener('click', () => {
+  document.querySelectorAll('.nav-item-drop').forEach(d => d.classList.remove('open'));
+});
+
+// MOBILE MENU
+function toggleMobileMenu() {
+  const menu = document.getElementById('mobileMenu');
+  const btn = document.getElementById('hamburgerBtn');
+  const isOpen = menu.classList.toggle('open');
+  btn.classList.toggle('open', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+}
+function closeMobileMenu() {
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.getElementById('hamburgerBtn').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Jump straight to a specific AI Tools category from the nav dropdown / mobile menu
+function goToAICategory(e, cat) {
+  if (e) e.preventDefault();
+  const tab = document.querySelector(`.ai-tab[onclick*="'${cat}'"]`);
+  if (tab) tab.click();
+  const section = document.getElementById('aitools');
+  if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
 
 // AI FILTER
 function filterAI(e, cat) {
